@@ -1,13 +1,9 @@
-using System.Collections.Generic;
-using System.Linq;
 using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Models;
 using MagicVilla_VillaAPI.Models.Dto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla_VillaAPI.Controllers;
 
@@ -78,7 +74,6 @@ public class VillaApiController : ControllerBase
 
         Villa model = new Villa()
         {
-            Id = villaDto.Id,
             Name = villaDto.Name,
             Details = villaDto.Details,
             Rate = villaDto.Rate,
@@ -151,7 +146,7 @@ public class VillaApiController : ControllerBase
         {
             return BadRequest();
         }
-        var villa = _db.Villas.FirstOrDefault(u => u.Id == id);
+        var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
         
         VillaDto villaDto = new VillaDto()
         {

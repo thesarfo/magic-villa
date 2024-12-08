@@ -53,7 +53,7 @@ public class VillaApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public ActionResult<VillaDto> CreateVilla([FromBody] VillaDto villaDto)
+    public ActionResult<VillaDto> CreateVilla([FromBody] VillaCreateDto villaDto)
     {
 
         if (_db.Villas.FirstOrDefault(u => u.Name.ToLower() == villaDto.Name.ToLower()) != null)
@@ -65,11 +65,6 @@ public class VillaApiController : ControllerBase
         if (villaDto == null)
         {
             return BadRequest(villaDto);
-        }
-
-        if (villaDto.Id > 0)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
         Villa model = new Villa()
@@ -85,7 +80,7 @@ public class VillaApiController : ControllerBase
         _db.Villas.Add(model);
         _db.SaveChanges();
         
-        return CreatedAtRoute("GetVilla", new {id = villaDto.Id}, villaDto);
+        return CreatedAtRoute("GetVilla", new {id = model.Id}, model);
     }
 
     [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -113,7 +108,7 @@ public class VillaApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [HttpPut("{id:int}", Name = "UpdateVilla")]
-    public IActionResult UpdateVilla(int id, [FromBody]VillaDto villaDto)
+    public IActionResult UpdateVilla(int id, [FromBody]VillaUpdateDto villaDto)
     {
         if (villaDto == null || id != villaDto.Id)
         {
@@ -140,7 +135,7 @@ public class VillaApiController : ControllerBase
     [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaDto> patchDto)
+    public IActionResult UpdatePartialVilla(int id, JsonPatchDocument<VillaUpdateDto> patchDto)
     {
         if (patchDto == null || id == 0)
         {
@@ -148,7 +143,7 @@ public class VillaApiController : ControllerBase
         }
         var villa = _db.Villas.AsNoTracking().FirstOrDefault(u => u.Id == id);
         
-        VillaDto villaDto = new VillaDto()
+        VillaUpdateDto villaDto = new VillaUpdateDto()
         {
             Id = villa.Id,
             Name = villa.Name,

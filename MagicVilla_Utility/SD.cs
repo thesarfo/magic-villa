@@ -1,6 +1,6 @@
 namespace MagicVilla_Utility;
 
-public static class StaticDetails
+public static class SD
 {
     public enum ApiType
     {

@@ -10,4 +10,8 @@
       <ProjectReference Include="..\MagicVilla_Utility\MagicVilla_Utility.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+    </ItemGroup>
+
 </Project>

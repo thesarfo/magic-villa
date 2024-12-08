@@ -14,12 +14,14 @@ public class VillaNumberApiController : ControllerBase
 {
     protected ApiResponse _response;
     private readonly IVillaNumberRepository _dbVillaNumber;
+    private readonly IVillaRepository _dbVilla;
     private readonly IMapper _mapper;
 
-    public VillaNumberApiController(IMapper mapper, IVillaNumberRepository dbVillaNumber)
+    public VillaNumberApiController(IMapper mapper, IVillaNumberRepository dbVillaNumber, IVillaRepository dbVilla)
     {
         _mapper = mapper;
         _dbVillaNumber = dbVillaNumber;
+        _dbVilla = dbVilla;
         _response = new ApiResponse();
     }
 
@@ -91,6 +93,12 @@ public class VillaNumberApiController : ControllerBase
                 ModelState.AddModelError("CustomEror", "Villa Number already Exists!");
                 return BadRequest(ModelState);
             }
+            
+            if(await _dbVilla.GetAsync(u => u.Id == createDto.VillaId) == null)
+            {
+                ModelState.AddModelError("CustomEror", "Villa Id is Invalid");
+                return BadRequest(ModelState);
+            }
 
             if (createDto == null)
             {
@@ -159,6 +167,12 @@ public class VillaNumberApiController : ControllerBase
             {
                 _response.StatusCode = HttpStatusCode.BadRequest;
                 return BadRequest(_response);
+            }
+            
+            if(await _dbVilla.GetAsync(u => u.Id == updateDto.VillaId) == null)
+            {
+                ModelState.AddModelError("CustomEror", "Villa Id is Invalid");
+                return BadRequest(ModelState);
             }
 
             var model = _mapper.Map<VillaNumber>(updateDto);

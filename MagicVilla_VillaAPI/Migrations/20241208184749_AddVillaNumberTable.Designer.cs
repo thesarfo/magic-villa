@@ -4,6 +4,7 @@ using MagicVilla_VillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagicVilla_VillaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241208184749_AddVillaNumberTable")]
+    partial class AddVillaNumberTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,14 +66,14 @@ namespace MagicVilla_VillaAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Villas");
+                    b.ToTable("Villa");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Amenity = "",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2265),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(6867),
                             Details = "Dummy Details",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Royal Villa",
@@ -83,7 +86,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 2,
                             Amenity = "Fireplace, Garden",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2327),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(6969),
                             Details = "Charming cottage surrounded by nature.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Cozy Cottage",
@@ -96,7 +99,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 3,
                             Amenity = "Beach Access, BBQ Area",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2335),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(6979),
                             Details = "A villa with stunning ocean views.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Beachfront Bungalow",
@@ -109,7 +112,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 4,
                             Amenity = "Hiking Trails, Fireplace",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2342),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(6988),
                             Details = "Peaceful retreat with breathtaking mountain views.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Mountain Retreat",
@@ -122,7 +125,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 5,
                             Amenity = "Rooftop Terrace, High-Speed Wi-Fi",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2494),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(6999),
                             Details = "Modern villa located in the heart of the city.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Cityscape Loft",
@@ -135,7 +138,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 6,
                             Amenity = "Kayak Rental, Fishing Dock",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2502),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(7008),
                             Details = "Relaxing villa by the lake.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Lakeside Lodge",
@@ -148,7 +151,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 7,
                             Amenity = "Pool, Outdoor Lounge",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2509),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(7017),
                             Details = "Exotic villa in a desert landscape.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Desert Oasis",
@@ -161,7 +164,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 8,
                             Amenity = "Library, Wine Cellar",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2515),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(7026),
                             Details = "Elegant villa with historic charm.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Historic Manor",
@@ -174,7 +177,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 9,
                             Amenity = "Outdoor Shower, Hammock",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2522),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(7036),
                             Details = "Secluded villa surrounded by lush jungle.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Jungle Hideaway",
@@ -187,7 +190,7 @@ namespace MagicVilla_VillaAPI.Migrations
                         {
                             Id = 10,
                             Amenity = "Ski-in/Ski-out, Hot Tub",
-                            CreatedDate = new DateTime(2024, 12, 8, 18, 50, 31, 134, DateTimeKind.Local).AddTicks(2529),
+                            CreatedDate = new DateTime(2024, 12, 8, 18, 47, 47, 863, DateTimeKind.Local).AddTicks(7045),
                             Details = "Cozy villa with stunning snowy views.",
                             ImageUrl = "https://placehold.co/100x100",
                             Name = "Snowy Chalet",
@@ -196,25 +199,6 @@ namespace MagicVilla_VillaAPI.Migrations
                             Sqft = 650,
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
-                });
-
-            modelBuilder.Entity("MagicVilla_VillaAPI.Models.VillaNumber", b =>
-                {
-                    b.Property<int>("VillaNo")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("SpecialDetails")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("VillaNo");
-
-                    b.ToTable("VillaNumbers");
                 });
 #pragma warning restore 612, 618
         }

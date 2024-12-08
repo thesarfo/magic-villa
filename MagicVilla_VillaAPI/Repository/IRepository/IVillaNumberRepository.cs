@@ -1,0 +1,9 @@
+using MagicVilla_VillaAPI.Models;
+
+namespace MagicVilla_VillaAPI.Repository.IRepository;
+
+public interface IVillaNumberRepository : IRepository<VillaNumber>
+{
+    Task<Models.VillaNumber> UpdateAsync(VillaNumber entity);
+
+}

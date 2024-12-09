@@ -46,7 +46,7 @@ public class BaseService : IBaseService
                     break;
                 
                 default:
-                    message.Method = HttpMethod.Post;
+                    message.Method = HttpMethod.Get;
                     break;
             }
 

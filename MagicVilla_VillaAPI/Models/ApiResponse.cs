@@ -8,7 +8,7 @@ public class ApiResponse
 
     public bool IsSuccess { get; set; }
     
-    public List<string>? ErrorMessages { get; set; }
+    public List<string> ErrorMessages { get; set; }
     
-    public object? Result { get; set; }
+    public object Result { get; set; }
 }

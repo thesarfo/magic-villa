@@ -16,7 +16,7 @@ public class Repository<T> : IRepository<T> where T : class
         _dbSet = _db.Set<T>();
     }
 
-    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+    public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, string includeProperties = null)
     {
         IQueryable<T> query = _dbSet;
 
@@ -35,7 +35,7 @@ public class Repository<T> : IRepository<T> where T : class
         return await query.ToListAsync();
     }
 
-    public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string? includeProperties = null)
+    public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, bool tracked = true, string includeProperties = null)
     {
         IQueryable<T> query = _dbSet;
 

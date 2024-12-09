@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MagicVilla_VillaAPI.Controllers;
 
 [ApiController]
-[Route("api/VillaNumberAPI")]
+[Route("api/villaNumberAPI")]
 public class VillaNumberApiController : ControllerBase
 {
     protected ApiResponse _response;

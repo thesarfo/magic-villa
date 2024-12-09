@@ -2,6 +2,7 @@ using AutoMapper;
 using MagicVilla.Web.Models;
 using MagicVilla.Web.Models.Dto.Villa;
 using MagicVilla.Web.Models.Dto.VillaNumber;
+using MagicVilla.Web.Models.VM;
 using MagicVilla.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,7 +32,7 @@ public class VillaNumberController : Controller
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<VillaNumberDto>>(Convert.ToString(response.Result));
-}
+            }
             return View(list);
         }
 
@@ -65,7 +66,7 @@ public class VillaNumberController : Controller
                 }
                 else
                 {
-                    if (response.ErrorMessages.Count > 0)
+                    if (response != null && response.ErrorMessages.Count > 0)
                     {
                         ModelState.AddModelError("ErrorMessages", response.ErrorMessages.FirstOrDefault());
                     }
@@ -85,17 +86,18 @@ public class VillaNumberController : Controller
             return View(model);
         }
 
-        public async Task<IActionResult> UpdateVillaNumber(int villaNo)
+        [HttpGet]
+        public async Task<IActionResult> UpdateVillaNumber(int villaId)
         {
             VillaNumberUpdateVM villaNumberVM = new();
-            var response = await _villaNumberService.GetAsync<ApiResponse>(villaNo);
+            var response = await _villaNumberService.GetAsync<ApiResponse>(villaId);
             if (response != null && response.IsSuccess)
             {
                 VillaNumberDto model = JsonConvert.DeserializeObject<VillaNumberDto>(Convert.ToString(response.Result));
                 villaNumberVM.VillaNumber =  _mapper.Map<VillaNumberUpdateDto>(model);
             }
 
-            response = await _villaService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString();
+            response = await _villaService.GetAllAsync<ApiResponse>();
             if (response != null && response.IsSuccess)
             {
                 villaNumberVM.VillaList = JsonConvert.DeserializeObject<List<VillaDto>>
@@ -111,6 +113,7 @@ public class VillaNumberController : Controller
             return NotFound();
         }
 
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVillaNumber(VillaNumberUpdateVM model)
@@ -145,6 +148,7 @@ public class VillaNumberController : Controller
             return View(model);
         }
 
+        
         public async Task<IActionResult> DeleteVillaNumber(int villaNo)
         {
             VillaNumberDeleteVM villaNumberVM = new();
@@ -184,8 +188,4 @@ public class VillaNumberController : Controller
 
             return View(model);
         }
-
-
-
-    }
 }

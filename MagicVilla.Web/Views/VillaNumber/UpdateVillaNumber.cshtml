@@ -1,4 +1,4 @@
-@model MagicVilla_Web.Models.VM.VillaNumberUpdateVM
+@model MagicVilla.Web.Models.VM.VillaNumberUpdateVM
 
 <form asp-action="UpdateVillaNumber">
     <br />
@@ -18,13 +18,13 @@
             </div>
 
             <div class="col-2">
-                <label asp-for="VillaNumber.VillaID" class="control-label pt-2" style="font-size:20px;"></label>
+                <label asp-for="VillaNumber.VillaNo" class="control-label pt-2" style="font-size:20px;"></label>
             </div>
             <div class="col-10 pb-3">
-                <select asp-for="VillaNumber.VillaID" class="form-select" asp-items="@Model.VillaList">
+                <select asp-for="VillaNumber.VillaNo" class="form-select" asp-items="@Model.VillaList">
                     <option disabled selected>--Select Villa--</option>
                 </select>
-                <span asp-validation-for="VillaNumber.VillaID" class="text-danger"></span>
+                <span asp-validation-for="VillaNumber.VillaNo" class="text-danger"></span>
             </div>
             <div class="col-2">
                 <label asp-for="VillaNumber.SpecialDetails" class="control-label pt-2" style="font-size:20px;"></label>

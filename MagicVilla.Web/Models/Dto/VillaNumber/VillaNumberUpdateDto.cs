@@ -10,5 +10,5 @@ public class VillaNumberUpdateDto
     [Required]
     public int VillaId { get; set; }
 
-    public string? SpecialDetails { get; set; }
+    public string SpecialDetails { get; set; }
 }

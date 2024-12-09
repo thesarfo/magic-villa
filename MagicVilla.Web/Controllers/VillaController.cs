@@ -54,4 +54,59 @@ public class VillaController : Controller
         TempData["error"] = "Error encountered.";
         return View(model);
     }
+    
+    public async Task<IActionResult> UpdateVilla(int villaId)
+    {
+        var response = await _villaService.GetAsync<ApiResponse>(villaId);
+        if (response != null && response.IsSuccess)
+        {
+                
+            VillaDto model = JsonConvert.DeserializeObject<VillaDto>(Convert.ToString(response.Result));
+            return View(_mapper.Map<VillaUpdateDto>(model));
+        }
+        return NotFound();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UpdateVilla(VillaUpdateDto model)
+    {
+        if (ModelState.IsValid)
+        {
+            TempData["success"] = "Villa updated successfully";
+            var response = await _villaService.UpdateAsyc<ApiResponse>(model);
+            if (response != null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(IndexVilla));
+            }
+        }
+        TempData["error"] = "Error encountered.";
+        return View(model);
+    }
+    
+    public async Task<IActionResult> DeleteVilla(int villaId)
+    {
+        var response = await _villaService.GetAsync<ApiResponse>(villaId);
+        if (response != null && response.IsSuccess)
+        {
+            VillaDto model = JsonConvert.DeserializeObject<VillaDto>(Convert.ToString(response.Result));
+            return View(model);
+        }
+        return NotFound();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteVilla(VillaDto model)
+    {
+            
+        var response = await _villaService.DeleteAsync<ApiResponse>(model.Id);
+        if (response != null && response.IsSuccess)
+        {
+            TempData["success"] = "Villa deleted successfully";
+            return RedirectToAction(nameof(IndexVilla));
+        }
+        TempData["error"] = "Error encountered.";
+        return View(model);
+    }
 }

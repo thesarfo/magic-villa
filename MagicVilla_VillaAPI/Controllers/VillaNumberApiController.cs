@@ -31,7 +31,7 @@ public class VillaNumberApiController : ControllerBase
     {
         try
         {
-            IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync();
+            IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties:"Villa");
             _response.Result = _mapper.Map<List<VillaNumberDto>>(villaNumberList);
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;

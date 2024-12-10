@@ -39,7 +39,11 @@ public class UserRepository : IUserRepository
 
         if (user == null)
         {
-            return null;
+            return new LoginResponseDto()
+            {
+                Token = "",
+                User = null
+            };
         }
         
         // generate jwt if user was found

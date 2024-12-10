@@ -28,7 +28,7 @@ public class VillaApiController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    //[Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -52,7 +52,7 @@ public class VillaApiController : ControllerBase
     }
 
     [HttpGet("{id:int}", Name = "GetVilla")]
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     // [ProducesResponseType(200, Type = typeof(VillaDTO))]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -91,6 +91,7 @@ public class VillaApiController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -133,7 +134,7 @@ public class VillaApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [HttpDelete("{id:int}", Name = "DeleteVilla")]
-    [Authorize(Roles = "CUSTOM")]
+    [Authorize(Roles = "admin")]
     public async Task<ActionResult<ApiResponse>> DeleteVilla(int id)
     {
         try

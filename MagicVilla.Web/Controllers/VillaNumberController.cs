@@ -4,6 +4,7 @@ using MagicVilla.Web.Models.Dto.Villa;
 using MagicVilla.Web.Models.Dto.VillaNumber;
 using MagicVilla.Web.Models.VM;
 using MagicVilla.Web.Services.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -36,6 +37,7 @@ public class VillaNumberController : Controller
             return View(list);
         }
 
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateVillaNumber()
         {
             VillaNumberCreateVM villaNumberVM = new();
@@ -53,6 +55,7 @@ public class VillaNumberController : Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateVillaNumber(VillaNumberCreateVM model)
         {
@@ -115,6 +118,7 @@ public class VillaNumberController : Controller
 
         
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateVillaNumber(VillaNumberUpdateVM model)
         {
@@ -148,7 +152,7 @@ public class VillaNumberController : Controller
             return View(model);
         }
 
-        
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteVillaNumber(int villaNo)
         {
             VillaNumberDeleteVM villaNumberVM = new();
@@ -176,6 +180,7 @@ public class VillaNumberController : Controller
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteVillaNumber(VillaNumberDeleteVM model)
         {

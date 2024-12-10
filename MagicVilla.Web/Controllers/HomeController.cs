@@ -1,5 +1,6 @@
  using AutoMapper;
-using MagicVilla.Web.Models;
+ using MagicVilla_Utility;
+ using MagicVilla.Web.Models;
 using MagicVilla.Web.Models.Dto.Villa;
 using MagicVilla.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,7 @@ public class HomeController : Controller
     {
         List<VillaDto> list = new();
 
-        var response = await _villaService.GetAllAsync<ApiResponse>();
+        var response = await _villaService.GetAllAsync<ApiResponse>(HttpContext.Session.GetString(SD.SessionToken));
         if (response != null && response.IsSuccess)
         {
             list = JsonConvert.DeserializeObject<List<VillaDto>>(Convert.ToString(response.Result));

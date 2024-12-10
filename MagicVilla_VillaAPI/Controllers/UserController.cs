@@ -8,15 +8,15 @@ namespace MagicVilla_VillaAPI.Controllers;
 
 [Route("api/UsersAuth")]
 [ApiController]
-public class UserController : Controller
+public class UserController : ControllerBase
 {
      private readonly IUserRepository _userRepository;
      protected ApiResponse _response;
 
-     public UserController(IUserRepository userRepository, ApiResponse response)
+     public UserController(IUserRepository userRepository)
      {
           _userRepository = userRepository;
-          _response = response;
+          _response = new();
      }
 
      [HttpPost("login")]

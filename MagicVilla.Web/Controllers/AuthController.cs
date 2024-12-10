@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using MagicVilla_Utility;
 using MagicVilla.Web.Models;
 using MagicVilla.Web.Models.Dto.User;
 using MagicVilla.Web.Services.IServices;
@@ -44,7 +45,7 @@ public class AuthController : Controller
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
 
-                //HttpContext.Session.SetString(SD.SessionToken, model.Token);
+                HttpContext.Session.SetString(SD.SessionToken, model.Token);
                 return RedirectToAction("Index","Home");
             }
             else
@@ -74,15 +75,15 @@ public class AuthController : Controller
         }
 
 
-        // public async Task<IActionResult> Logout()
-        // {
-        //     await HttpContext.SignOutAsync();
-        //     HttpContext.Session.SetString(SD.SessionToken, "");
-        //     return RedirectToAction("Index","Home");
-        // }
-        //
-        // public IActionResult AccessDenied()
-        // {
-        //     return View();
-        // }
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            HttpContext.Session.SetString(SD.SessionToken, "");
+            return RedirectToAction("Index","Home");
+        }
+        
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
 }

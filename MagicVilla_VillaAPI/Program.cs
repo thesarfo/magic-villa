@@ -92,6 +92,23 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+    options.SwaggerDoc("v1", new OpenApiInfo()
+    {
+        Version = "v1.0",
+        Title = "MagicVilla API",
+        Description = "An ASP.NET Core Web API",
+        TermsOfService = new Uri("https://example.com/terms"),
+        Contact = new OpenApiContact
+        {
+            Name = "Ernest Sarfo",
+            Url = new Uri("https://github.com/thesarfo")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "MIT License",
+            Url = new Uri("https://opensource.org/licenses/MIT")
+        }
+    });
 });
 
 var app = builder.Build();
@@ -100,7 +117,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Magic_Villa V1");
+    });
 }
 
 app.UseHttpsRedirection();

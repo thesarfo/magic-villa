@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace MagicVilla_VillaAPI.Controllers;
 
 [ApiController]
-[Route("api/villaNumberAPI")]
+[Route("api/v{version:apiVersion}/villaNumberAPI")]
+[ApiVersion("1.0")]
+[ApiVersion("2.0")]
 public class VillaNumberApiController : ControllerBase
 {
     protected ApiResponse _response;
@@ -26,6 +28,7 @@ public class VillaNumberApiController : ControllerBase
         _response = new ApiResponse();
     }
 
+    [MapToApiVersion("1.0")]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<ApiResponse>> GetVillaNumbers()
@@ -46,6 +49,13 @@ public class VillaNumberApiController : ControllerBase
         }
     }
 
+    [MapToApiVersion("2.0")]
+    [HttpGet]
+    public IEnumerable<string> Get()
+    {
+        return new string[] { "value1", "value2" };
+    }
+    
     [HttpGet("{id:int}", Name = "GetVillaNumber")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

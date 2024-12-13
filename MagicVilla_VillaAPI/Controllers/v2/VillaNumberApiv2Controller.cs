@@ -9,7 +9,7 @@ public class VillaNumberApiv2Controller : ControllerBase
 {
 
     // [MapToApiVersion("2.0")]
-    [HttpGet]
+    [HttpGet("GetString")]
     public IEnumerable<string> Get()
     {
         return new string[] { "value1", "value2" };

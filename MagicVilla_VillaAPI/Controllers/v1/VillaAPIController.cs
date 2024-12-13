@@ -30,6 +30,7 @@ public class VillaAPIController : ControllerBase
 
     [HttpGet]
     //[Authorize]
+    [ResponseCache(Duration = 30)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -55,6 +56,7 @@ public class VillaAPIController : ControllerBase
     [HttpGet("{id:int}", Name = "GetVilla")]
     //[Authorize(Roles = "admin")]
     // [ProducesResponseType(200, Type = typeof(VillaDTO))]
+    //[ResponseCache(Duration = 30, Location = ResponseCacheLocation.None, NoStore = true)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

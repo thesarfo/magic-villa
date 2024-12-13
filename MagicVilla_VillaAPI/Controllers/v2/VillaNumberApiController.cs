@@ -5,7 +5,7 @@ namespace MagicVilla_VillaAPI.Controllers.v2;
 [ApiController]
 [Route("api/v{version:apiVersion}/villaNumberAPI")]
 [ApiVersion("2.0")]
-public class VillaNumberApiv2Controller : ControllerBase
+public class VillaNumberApiController : ControllerBase
 {
 
     // [MapToApiVersion("2.0")]

@@ -34,12 +34,22 @@ public class VillaAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<ActionResult<ApiResponse>> GetVillas()
+    public async Task<ActionResult<ApiResponse>> GetVillas([FromQuery(Name = "FilterOccupancy")] int? occupancy)
     {
         try
         {
-            _logger.LogInformation("Getting All Villas");
-            IEnumerable<Villa> villaList = await _dbVilla.GetAllAsync();
+           
+            IEnumerable<Villa> villaList ;
+
+            if (occupancy > 0)
+            {
+                villaList = await _dbVilla.GetAllAsync(u => u.Occupancy == occupancy);
+            }
+            else
+            {
+                villaList = await _dbVilla.GetAllAsync();
+            }
+                
             _response.Result = _mapper.Map<List<VillaDto>>(villaList);
             _response.StatusCode = HttpStatusCode.OK;
             _response.IsSuccess = true;

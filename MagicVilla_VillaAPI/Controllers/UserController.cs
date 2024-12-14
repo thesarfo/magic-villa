@@ -27,13 +27,11 @@ public class UserController : ControllerBase
           if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
           {
                _response.StatusCode = HttpStatusCode.BadRequest;
-               _response.IsSuccess = false;
                _response.ErrorMessages.Add("Username or password is incorrect.");
                return BadRequest(_response);
           }
 
           _response.StatusCode = HttpStatusCode.OK;
-          _response.IsSuccess = true;
           _response.Result = loginResponse;
           return Ok(_response);
 
@@ -47,7 +45,6 @@ public class UserController : ControllerBase
           if (!ifUserNameUnique)
           {
                _response.StatusCode = HttpStatusCode.BadRequest;
-               _response.IsSuccess = false;
                _response.ErrorMessages.Add("Username already exists.");
                return BadRequest(_response);
           }
@@ -55,12 +52,10 @@ public class UserController : ControllerBase
           if (user == null)
           {
                _response.StatusCode = HttpStatusCode.BadRequest;
-               _response.IsSuccess = false;
                _response.ErrorMessages.Add("Error while registering");
                return BadRequest(_response);
           }
           _response.StatusCode = HttpStatusCode.OK;
-          _response.IsSuccess = true;
           return Ok(_response);
      }
 }

@@ -36,12 +36,10 @@ public class VillaNumberApiController : ControllerBase
             IEnumerable<VillaNumber> villaNumberList = await _dbVillaNumber.GetAllAsync(includeProperties:"Villa");
             _response.Result = _mapper.Map<List<VillaNumberDto>>(villaNumberList);
             _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -71,12 +69,10 @@ public class VillaNumberApiController : ControllerBase
 
             _response.Result = _mapper.Map<VillaNumberDto>(villaNumber);
             _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -114,14 +110,12 @@ public class VillaNumberApiController : ControllerBase
             await _dbVillaNumber.CreateAsync(villaNumber);
             _response.Result = _mapper.Map<VillaNumberDto>(villaNumber);
             _response.StatusCode = HttpStatusCode.Created;
-            _response.IsSuccess = true;
 
 
             return CreatedAtRoute("GetVillaNumber", new { id = villaNumber.VillaNo }, _response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -149,12 +143,10 @@ public class VillaNumberApiController : ControllerBase
 
             await _dbVillaNumber.RemoveAsync(villaNumber);
             _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -185,12 +177,10 @@ public class VillaNumberApiController : ControllerBase
 
             await _dbVillaNumber.UpdateAsync(model);
             _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }

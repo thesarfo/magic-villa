@@ -60,12 +60,11 @@ public class VillaAPIController : ControllerBase
             
             _response.Result = _mapper.Map<List<VillaDto>>(villaList);
             _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
+
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -100,12 +99,10 @@ public class VillaAPIController : ControllerBase
 
             _response.Result = _mapper.Map<VillaDto>(villa);
             _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -136,14 +133,12 @@ public class VillaAPIController : ControllerBase
             await _dbVilla.CreateAsync(villa);
             _response.Result = _mapper.Map<VillaDto>(villa);
             _response.StatusCode = HttpStatusCode.Created;
-            _response.IsSuccess = true;
 
 
             return CreatedAtRoute("GetVilla", new { id = villa.Id }, _response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -172,12 +167,10 @@ public class VillaAPIController : ControllerBase
 
             await _dbVilla.RemoveAsync(villa);
             _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }
@@ -200,12 +193,10 @@ public class VillaAPIController : ControllerBase
 
             await _dbVilla.UpdateAsync(model);
             _response.StatusCode = HttpStatusCode.NoContent;
-            _response.IsSuccess = true;
             return Ok(_response);
         }
         catch (Exception ex)
         {
-            _response.IsSuccess = false;
             _response.ErrorMessages = new List<string>() { ex.ToString() };
             return _response;
         }

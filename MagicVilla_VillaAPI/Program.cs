@@ -60,6 +60,11 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers(option =>
 {
+    option.CacheProfiles.Add("Default30",
+        new CacheProfile()
+        {
+            Duration = 30
+        });
     //option.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlSerializerFormatters();
 

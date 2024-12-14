@@ -30,7 +30,7 @@ public class VillaAPIController : ControllerBase
 
     [HttpGet]
     //[Authorize]
-    [ResponseCache(Duration = 30)]
+    [ResponseCache(CacheProfileName = "Default30")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

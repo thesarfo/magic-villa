@@ -75,11 +75,21 @@ public class AuthController : Controller
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegistrationRequestDto obj)
         {
+            if (string.IsNullOrEmpty(obj.Role))
+            {
+                obj.Role = SD.Customer;
+            }
             ApiResponse result =  await _authService.RegisterAsync<ApiResponse>(obj);
             if (result != null && result.IsSuccess)
             {
                 return RedirectToAction("Login");
             }
+            var roleList = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = SD.Admin, Value = SD.Admin },
+                new SelectListItem { Text = SD.Customer, Value = SD.Customer }
+            };
+            ViewBag.RoleList = roleList;
             return View();
         }
 

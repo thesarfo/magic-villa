@@ -31,7 +31,7 @@ public class VillaAPIController : ControllerBase
 
     [HttpGet]
     //[Authorize]
-    [ResponseCache(CacheProfileName = "Default30")]
+    //[ResponseCache(CacheProfileName = "Default30")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -113,7 +113,7 @@ public class VillaAPIController : ControllerBase
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<ActionResult<ApiResponse>> CreateVilla([FromBody] VillaCreateDto createDto)
+    public async Task<ActionResult<ApiResponse>> CreateVilla([FromForm] VillaCreateDto createDto)
     {
         try
         {
@@ -131,6 +131,36 @@ public class VillaAPIController : ControllerBase
             var villa = _mapper.Map<Villa>(createDto);
 
             await _dbVilla.CreateAsync(villa);
+
+            if (createDto.Image != null)
+            {
+                string fileName = villa.Id + Path.GetExtension(createDto.Image.FileName);
+                string filePath = @"wwwroot/ProductImage/" + fileName;
+
+                var directoryLocation = Path.Combine(Directory.GetCurrentDirectory(), filePath);
+
+                FileInfo file = new FileInfo(directoryLocation);
+
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+
+                using (var fileStream = new FileStream(directoryLocation, FileMode.Create))
+                {
+                    createDto.Image.CopyTo(fileStream);
+                }
+                var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.Value}{HttpContext.Request.PathBase.Value}";
+                villa.ImageUrl = baseUrl + "/ProductImage/" + fileName;
+                villa.ImageLocalPath = filePath;
+                
+            }
+            else
+            {
+                villa.ImageUrl = "https://placehold.co/600x40";
+            }
+
+            await _dbVilla.UpdateAsync(villa);
             _response.Result = _mapper.Map<VillaDto>(villa);
             _response.StatusCode = HttpStatusCode.Created;
 

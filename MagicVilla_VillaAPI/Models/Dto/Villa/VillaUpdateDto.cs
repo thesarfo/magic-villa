@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MagicVilla_VillaAPI.Models.Dto;
+namespace MagicVilla_VillaAPI.Models.Dto.Villa;
 
 public class VillaUpdateDto
 {
@@ -21,8 +21,12 @@ public class VillaUpdateDto
     
     [Required]
     public int Sqft { get; set; }
+
+    public string? ImageUrl { get; set; }
     
-    [Required]
-    public string ImageUrl { get; set; }
+    public string? ImageLocalPath { get; set; }
+    
+    public IFormFile? Image { get; set; }
+
     public string Amenity { get; set; }
 }

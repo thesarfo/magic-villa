@@ -14,4 +14,10 @@ public static class SD
     public static string CurrentApiVersion = "v2";
     public const string Admin = "admin";
     public const string Customer = "customer";
+
+    public enum ContentType
+    {
+        Json,
+        MultipartFormData,
+    }
 }

@@ -12,4 +12,6 @@ public class ApiRequest
     
     public string Token { get; set; }
 
+    public ContentType ContentType { get; set; } = ContentType.Json;
+
 }
